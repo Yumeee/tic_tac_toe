@@ -18,25 +18,26 @@ var game = 0;
 
 // Game count adds 1 as a player plays.
 squares.forEach(function(square){
-  square.addEventListener('click', function() {
-    if (square.innerText == '') {
-      square.innerText = player();
-    }
-    else {
-      square.disabled = true;
-    }
-    checkWin();
-    game+=1;
-  });
+  square.addEventListener('click', play)
 });
 
+function play() {
+   if (this.innerText == '') {
+     this.innerText = player();
+   }
+   else {
+     this.disabled = true;
+   }
+   checkWin();
+   game+=1;
+ };
 // alternate between O and X depending on the game round. Start with O.
 function player() {
   if (game % 2 == 0) {
     return 'O';}
-    else {
-      return 'X';}
-    }
+  else {
+    return 'X';}
+  }
 
 
 // if winGame matches with location of X and Os, stop the game
@@ -49,23 +50,20 @@ function checkWin(){
     var three = squares[set[2]-1].innerText
 
     if (one != '' && one === two && one === three) {
-      winLine.innerHTML = "Player "+ "'" + one + "' wins!";
+      winLine.innerHTML = "Player "+ "'" + one + "' wins!" + "<br>" + "Press reset to replay.";
       endGame();
-
-    };
-    });
-};
+    }
+  //   else if (squares.every{
+  //     if (square != '') {
+  //     winLine.innerHTML = "It's a draw! Please press reset."
+  //   };
+  // }));
+})};
 
 function endGame() {
-
-}
-
-function resetGame() {
-  winLine.innerText = '';
-  squares.forEach(function(square) {
-    square.innerText = ''
-  })
-
+  squares.forEach(function(square){
+    square.removeEventListener('click', play)
+  });
 };
 
 // reset button
@@ -73,6 +71,15 @@ var reset = document.querySelector('.reset')
 
 reset.addEventListener('click', function(){
   resetGame();
-})
+});
+
+function resetGame() {
+  winLine.innerText = '';
+  squares.forEach(function(square) {
+    square.innerText = ''
+    square.addEventListener('click', play)
+  })
+};
+
 
 });

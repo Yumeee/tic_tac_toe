@@ -22,6 +22,7 @@ table {
   border-collapse: collapse;
   table-layout: fixed;
   margin: 0 auto;
+  margin-top: 70px;
 }
 
 td {
@@ -52,4 +53,9 @@ table tr td:first-child {
 
 table tr td:last-child {
   border-right: none;
+}
+
+p {
+  position: absolute;
+  margin-left: 41%;
 }
